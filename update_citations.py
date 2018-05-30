@@ -24,7 +24,7 @@ srv = pysftp.Connection(host=cd.sftp_host, username=cd.sftp_username,
 password=cd.sftp_password, cnopts = cnopts)
 
 # get the file listing
-all_files = srv.listdir('C:/Users/Public/automation/ParkingCitations')
+all_files = srv.listdir()
 
 # get today's date
 today = str(datetime.datetime.today()).split()[0]
