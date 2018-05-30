@@ -96,7 +96,7 @@ client = sc(domain = "data.lacity.org", app_token = cd.socrata_app_token,
 	username = cd.socrata_username, password = cd.socrata_password)
 
 # upsert in small batches to avoid timeout
-batch_size = 5000
+batch_size = 1000
 n_batches = math.ceil(len(json_data) / batch_size)
 
 for i in range(n_batches):
@@ -104,8 +104,9 @@ for i in range(n_batches):
 	b2 = (i + 1) * batch_size
 	try:
 		client.upsert('wjz9-h9np', json_data[b1:b2])
+		print("upload succeeded for rows " + str(b1) + " to " + str(b2) + ".")
 	except:
-		print("upload failed for rows " + b1 + " to " + b2 + ".")
+		print("upload failed for rows " + str(b1) + " to " + str(b2) + ".")
 
 # close the client
 client.close()
